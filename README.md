@@ -49,6 +49,25 @@ function updateMinMoves() {
 function renderDisks() {
     const gameArea = document.querySelector('.game-area');
     gameArea.innerHTML = '';
+
+    towers.forEach((tower, towerIndex) => {
+        const towerEl = document.createElement('div');
+        towerEl.className = 'tower';
+        towerEl.dataset.tower = towerIndex;
+
+        tower.forEach((diskSize, diskIndex) => {
+            const diskEl = document.createElement('div');
+            diskEl.className = 'disk';
+            diskEl.dataset.size = diskSize;
+            diskEl.style.width = `${diskSize * 30}px`;
+            diskEl.style.backgroundColor = DISK_COLORS[diskSize - 1];
+            diskEl.style.bottom = `${diskIndex * 20}px`;
+            towerEl.appendChild(diskEl);
+        });
+
+        gameArea.appendChild(towerEl);
+    });
+}
     
     for (let t = 0; t < 3; t++) {
         const tower = document.createElement('div');
